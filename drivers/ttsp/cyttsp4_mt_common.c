@@ -449,26 +449,18 @@ static void cyttsp4_mt_fb_suspend(struct cyttsp4_mt_data *ts)
 {
 	struct device *dev = &ts->ttsp->dev;
 
-	if (ts->is_suspended)
-		return;
-
 	dev_info(dev, "%s\n", __func__);
 
 	pm_runtime_put(dev);
-	ts->is_suspended = true;
 }
 
 static void cyttsp4_mt_fb_resume(struct cyttsp4_mt_data *ts)
 {
 	struct device *dev = &ts->ttsp->dev;
 
-	if (!ts->is_suspended)
-		return;
-
 	dev_info(dev, "%s\n", __func__);
 
 	pm_runtime_get_sync(dev);
-	ts->is_suspended = false;
 }
 
 static int fb_notifier_callback(struct notifier_block *self,
